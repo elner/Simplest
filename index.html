@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>Simplest Grid System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/prism.css" />
+    <script src="javascript/prism.js"></script>
+  </head>
+  <body>
+
+    <h1>Simplest Grid System</h1>
+
+    <header>
+      <h2>Edit your project file (config.rb)</h2>
+      <p>Specify the way that Sass will handle decimal places</p>
+    </header>
+
+    <div class="wrapper">
+       <div class="content">
+<pre><code class="language-markup">
+  # Sets the right amount of decimals for rounding numbers
+  Sass::Script::Number.precision = 8
+</code></pre>
+      </div><!-- /#content-->
+    </div><!-- /#wrapper -->
+
+    <header>
+         <h2>Setting column width &amp; grid columns</h2>
+         <p>Set column width by mixin <code class=" language-markup">+col(column-width)</code> and default grid columns by the variable <code class=" language-markup">$simplest-grid-columns</code></p>
+    </header>
+
+    <div class="wrapper layout">
+      <div class="content">
+          <div class="main">
+              <ul class="two-col">
+                <li class="first"><b>+col(6)</b></li><li class="last"><b>+col(6)</b></li>
+              </ul>
+              <ul class="three-col">
+                <li class="first"><b>+col(4)</b></li><li><b>+col(4)</b></li><li class="last"><b>+col(4)</b></li>
+              </ul>
+              <ul class="four-col">
+                <li class="first"><b>+col(3)</b></li><li><b>+col(3)</b></li><li><b>+col(3)</b></li><li class="last"><b>+col(3)</b></li>
+              </ul>
+              <ul class="six-col">
+                <li class="first"><b>+col(2)</b></li><li><b>+col(2)</b></li><li><b>+col(2)</b></li><li><b>+col(2)</b></li><li><b>+col(2)</b></li><li class="last"><b>+col(2)</b></li>
+              </ul>
+          </div><!-- /#main-->
+      </div><!-- /#content-->
+    </div><!-- /#wrapper -->
+
+
+
+    <div class="wrapper">
+       <div class="content">
+<p>HTML:</p>
+<pre><code class="language-markup">
+&lt;div class=&quot;wrapper&quot;&gt;
+  &lt;div class=&quot;content&quot;&gt;
+      &lt;div class=&quot;main&quot;&gt;
+          &lt;ul class=&quot;two-col&quot;&gt;
+            &lt;li class=&quot;first&quot;&gt;&lt;/li&gt;&lt;li class=&quot;last&quot;&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+          &lt;ul class=&quot;three-col&quot;&gt;
+            &lt;li class=&quot;first&quot;&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li class=&quot;last&quot;&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+          &lt;ul class=&quot;four-col&quot;&gt;
+            &lt;li class=&quot;first&quot;&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li class=&quot;last&quot;&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+          &lt;ul class=&quot;six-col&quot;&gt;
+            &lt;li class=&quot;first&quot;&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li class=&quot;last&quot;&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+      &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>SASS:</p>
+<pre><code class="language-css">
+@import simplest-grid
+
+$simplest-grid-content  : 940px
+$simplest-gutter-width  : 20px
+$simplest-margin-width  : 20px
+$simplest-grid-columns  : 12
+$simplest-fluid-grid    : true
+
+.wrapper
+  +grid-wrapper
+  .content
+    +grid-content
+    .main
+      ul
+        +row
+        &.two-col li
+          +col(6)
+        &.three-col li
+          +col(4)
+        &.four-col li
+          +col(3)
+        &.six-col li
+          +col(2)
+</code></pre>
+    </div><!-- /#content-->
+  </div><!-- /#wrapper -->
+
+    <header>
+      <p>Use a combinations of different grid columns in a single layout by mixin <code class=" language-markup">+col(column-width, grid-columns)</code></p>
+    </header>
+
+<div class="wrapper layout">
+  <div class="content">
+      <div class="main">
+          <ul class="two-col">
+            <li class="first"><b>+col(1,2)</b></li><li class="last"><b>+col(1,2)</b></li>
+          </ul>
+          <ul class="three-col">
+            <li class="first"><b>+col(1,3)</b></li><li><b>+col(1,3)</b></li><li class="last"><b>+col(1,3)</b></li>
+          </ul>
+          <ul class="four-col">
+            <li class="first"><b>+col(1,4)</b></li><li><b>+col(1,4)</b></li><li><b>+col(1,4)</b></li><li class="last"><b>+col(1,4)</b></li>
+          </ul>
+          <ul class="six-col">
+            <li class="first"><b>+col(1,6)</b></li><li><b>+col(1,6)</b></li><li><b>+col(1,6)</b></li><li><b>+col(1,6)</b></li><li><b>+col(1,6)</b></li><li class="last"><b>+col(1,6)</b></li>
+          </ul>
+      </div><!-- /#main-->
+  </div><!-- /#content-->
+</div><!-- /#wrapper -->
+
+<div class="wrapper">
+   <div class="content">
+<p>SASS:</p>
+<pre><code class="language-css">
+@import simplest-grid
+
+$simplest-grid-content  : 940px
+$simplest-gutter-width  : 20px
+$simplest-margin-width  : 20px
+$simplest-fluid-grid    : true
+
+.wrapper
+  +grid-wrapper
+  .content
+    +grid-content
+    .main
+      ul
+        +row
+        &.two-col li
+          +col(1,2)
+        &.three-col li
+          +col(1,3)
+        &.four-col li
+          +col(1,4)
+        &.six-col li
+          +col(1,6)
+</code></pre>
+  </div><!-- /#content-->
+</div><!-- /#wrapper -->
+
+<header>
+  <h2>Semantic markup and nested columns</h2>
+</header>
+
+<div class="wrapper layout">
+  <div class="content">
+      <div class="main">
+        <section>
+          <b>+col(8)</b><i>spans 8 of 12 columns</i>
+          <article><b>+col(2, 4, parent(8))</b><i>spans 2 of 4 columns<br />parent column spans 8 of 12 columns</i></article>
+          <aside><b>+col(2, 4, parent(8))</b><i>spans 2 of 4 columns<br />parent column spans 8 of 12 columns</i></aside>
+        </section>
+        <nav><b>+col(4)</b><i>spans 4 of 12 columns</i></nav>
+      </div><!-- /#main-->
+  </div><!-- /#content-->
+</div><!-- /#wrapper -->
+
+
+    <div class="wrapper">
+       <div class="content">
+<p>HTML:</p>
+<pre><code class="language-markup">
+&lt;div class=&quot;wrapper&quot;&gt;
+  &lt;div class=&quot;content&quot;&gt;
+      &lt;div class=&quot;main&quot;&gt;
+        &lt;section&gt;
+          &lt;article&gt;&lt;/article&gt;
+          &lt;aside&gt;&lt;/aside&gt;
+        &lt;/section&gt;
+        &lt;nav&gt;&lt;/nav&gt;
+      &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>SASS:</p>
+<pre><code class="language-css">
+@import simplest-grid
+
+$simplest-grid-content  : 940px
+$simplest-gutter-width  : 20px
+$simplest-margin-width  : 20px
+$simplest-grid-columns  : 12
+$simplest-fluid-grid    : true
+
+.wrapper
+  +grid-wrapper
+  .content
+    +grid-content
+    .main
+      +row
+      section
+        +row
+        +col(8)
+        +first
+        article
+          +col(2, 4, parent(8))
+          +first
+        aside
+          +col(2, 4, parent(8))
+          +last
+      nav
+        +col(4)
+        +last
+</code></pre>
+    </div><!-- /#content-->
+  </div><!-- /#wrapper -->
+
+    <script src="javascript/ios-orientationchange-fix.js"></script>
+  </body>
+
+</html>
+
+
+

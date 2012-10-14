@@ -1,0 +1,144 @@
+/* * * * * * * *   SIMPLEST  * * * * * * * *
+  *
+  * The Semantic gridsystem
+  * Responsive, fixed or fluid layout, nested columns
+  *                  -:-
+  * The best solution is the simplest solution
+  *
+
+// Gridcontent width ( columns + gutter excluding margins )
+$simplest-grid-content  : 930px !default
+
+// Gutter width between columns
+$simplest-gutter-width  : 30px !default
+
+// Margin width on each side of grid-content
+$simplest-margin-width  : 30px !default
+
+// Default number of columns
+$simplest-grid-columns  : 3 !default
+
+// Force fluid grid
+$simplest-fluid-grid    : false
+
+// Grid column
+=col($v1:1, $v2:false, $v3:false)
+  $nr-of-columns          : $v1
+  $context                : $simplest-grid-content
+  $context-nr-of-columns  : $simplest-grid-columns
+
+  @if (type-of($v2) == number)
+    $context-nr-of-columns: $v2
+  @if (type-of($v3) == number)
+    $context              : $v3
+
+  $total-width            : $context
+
+  @if $simplest-fluid-grid
+    $total-width : 100%
+
+  $target_nr_of_col  : $nr-of-columns
+  $one-col-width     : ($context / $context-nr-of-columns) - ((($simplest-gutter-width * $context-nr-of-columns) - $simplest-gutter-width) / $context-nr-of-columns)
+  $target            : $one-col-width * $target_nr_of_col + (($simplest-gutter-width * $target_nr_of_col) - $simplest-gutter-width)
+  $col-width         : $total-width * ( $target /  $context )
+  $gutter-width      : $total-width * (($simplest-gutter-width / 2) / $context)
+
+  /*
+    span          : #{$target_nr_of_col} of #{$context-nr-of-columns} columns
+    context       : #{$context}
+    col-target    : #{$target}
+    col-width     : #{$col-width}
+    margin-target : #{$simplest-gutter-width / 2}
+    margin-width  : #{$gutter-width}
+
+  float: left
+  width: $col-width
+  margin-left: $gutter-width
+  margin-right: $gutter-width
+  //&:first-child,
+  &.first
+    margin-left: 0
+  //&:last-child,
+  &.last
+    margin-right: 0
+
+// Grid row
+=row
+  +clearfix
+  margin: 0
+  padding: 0
+  list-style: none
+  li
+    margin: 0
+    padding: 0
+
+=colgroup
+  +row
+
+//=push($offset:1)
+  margin-left:
+
+//=pull($offset:1)
+  margin-right:
+
+// @return $nr-of-columns total width including gutter
+@function col-width($nr-of-columns,$columns,$context)
+  $tot-gutter     : ($simplest-gutter-width * $columns) - $simplest-gutter-width
+  $one-col-width  : (($context  - $tot-gutter) / $columns)
+  @return           (($one-col-width * $nr-of-columns) + ($simplest-gutter-width * $nr-of-columns))
+
+// @return context width
+@function parent($nr-of-columns,$top-level-colums:$simplest-grid-columns)
+  @return col-width($nr-of-columns,$top-level-colums,$simplest-grid-content) - $simplest-gutter-width
+
+=grid-wrapper
+  margin: 0 auto
+  $width: $simplest-grid-content + ($simplest-margin-width * 2)
+  @if $simplest-fluid-grid
+    max-width: $width
+  @else
+    width: $width
+
+=grid-content
+  +row
+  $margin: $simplest-margin-width
+  @if $simplest-fluid-grid
+    $margin: ( $simplest-margin-width / ($simplest-grid-content + ($simplest-margin-width * 2)) ) * 100%
+  padding-left: $margin
+  padding-right: $margin
+
+=alpha
+  margin-left: 0
+
+=first
+  +alpha
+
+=omega
+  margin-right: 0
+
+=last
+  +omega
+
+=first-last
+  &.first
+    +first
+  &.last
+    +last
+
+=clearfix
+  // http://nicolasgallagher.com/micro-clearfix-hack/
+  //For modern browsers
+  &:before, &:after
+    content: ""
+    display: table
+  &:after
+    clear: both
+  // For IE 6/7 (trigger hasLayout)
+  zoom: 1
+
+// calc-percent(650px, 1000px)
+@function calc-percent($target, $container)
+  @return ($target / $container) * 100%
+
+@function strip-units($number)
+  @return $number / ($number * 0 + 1)
