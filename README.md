@@ -10,27 +10,29 @@ The Semantic gridsystem
 [Demo](http://elner.github.com/simplest/)
 
 
-#Usage
+#Setup
 
-1. Edit your project file (config.rb)
+###Edit your project file (config.rb)
 
 ```ruby
 # Sets the right amount of decimals for rounding numbers
 Sass::Script::Number.precision = 8
 ```
 
-2. Import Simplest gridsystem
+###Import Simplest gridsystem
 
-```ruby
+```css
 @import simplest
 ```
 
-3. Configure the SASS variables
+###Configure the SASS variables
 
-```ruby
+```css
 $simplest-grid-content  : 940px
 $simplest-gutter-width  : 20px
 $simplest-margin-width  : 20px
 $simplest-grid-columns  : 12
 $simplest-fluid-grid    : true
 ```
+
+#Usage
