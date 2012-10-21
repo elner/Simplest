@@ -1,4 +1,4 @@
-#SIMPLEST GRID SYSTEM - Compass Plugin
+#SIMPLEST GRID SYSTEM
 
 The Semantic gridsystem
 
