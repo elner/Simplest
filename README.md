@@ -1,4 +1,4 @@
-#SIMPLEST GRID SYSTEM
+#SIMPLEST GRID SYSTEM - Compass Plugin
 
 The Semantic gridsystem
 
@@ -11,11 +11,20 @@ The Semantic gridsystem
 
 ---
 
+#Install
+
+```ruby
+gem install simplest
+```
+
 #Setup
 
 ###Edit your project file (config.rb)
 
 ```ruby
+# Require any additional compass plugins here.
+require 'simplest'
+
 # Sets the right amount of decimals for rounding numbers
 Sass::Script::Number.precision = 8
 ```
