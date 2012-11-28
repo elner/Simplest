@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'simplest'
-  s.version     = '0.1.0'
-  s.date        = '2012-10-21'
+  s.version     = '0.1.1'
+  s.date        = '2012-11-27'
   s.summary     = "Simplest gridsystem"
   s.description = "The Semantic gridsystem"
   s.authors     = ["Elner"]
